@@ -1,0 +1,30 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Agustin Amenabar
+	email = baamenabar@gmail.com
+	username = ImINaBAR
+[core]
+	editor = vim
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = ~/.gitignore
+[alias]	
+	st = status
+	co = checkout
+	ci = commit
+	new = !sh -c 'git fetch && git checkout master && git pull origin master && git checkout -b $1' -
+	pulom = !sh -c 'git fetch && git checkout master && git pull origin master' -
+	mom = !sh -c 'git fetch && git merge --no-ff origin/master' -
+	#############
+	subadd = !sh -c 'git submodule add git://github.com/$1 $2/$(basename $1)' -
+	subup = submodule update --init --recursive
+	subpull = !git submodule foreach git pull --tags origin master
+	#############
+	bump = !sh -c 'git commit -am \"Version bump v$1\" && git psuoc && git release $1' -
+	release = !sh -c 'git tag v$1 && git pst' -
+	aliases = !git config -l | grep alias | cut -c 7-
+	whois = !sh -c 'git log -i -1 --author=\"$1\" --pretty=\"format:%an <%ae>\"' -
+	#############
+	ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+	human = name-rev --name-only --refs=refs/heads/*
