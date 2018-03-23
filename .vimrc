@@ -1,5 +1,6 @@
 " Show line numbers
-set  number
+set number
+set relativenumber
 
  " Show file stats 
 set ruler
